@@ -1,0 +1,154 @@
+/* Стиль для всего контента */
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    background-color: #f7f7f7;
+    margin-bottom: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto; /* Добавляет вертикальную прокрутку */
+}
+
+/* Стили для формы */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin-top: 20px;
+    z-index: 2;
+    position: relative;
+    /* max-height: 80vh;  /* Ограничиваем высоту формы */
+    /* : auto;  Включаем прокрутку формы, если контента слишком много */
+}
+
+
+/* Заголовки */
+h1 {
+    font-size: 2em;
+    color: #2d3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #2d3e50;
+    margin-bottom: 10px;
+}
+
+
+/* Стили для картинки */
+img {
+    display: block; /* Сохраняет пропорции */
+    margin: 20px auto;
+    object-fit: contain; /* Изображение сохраняет свои пропорции */
+    max-height: 300px;
+    transform: scale(2);/* Ограничиваем высоту изображения */
+    pointer-events: none;
+}
+
+
+form a {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+    z-index: 2;
+}
+
+form a:hover {
+    color: #45a049;
+}
+
+/* Стили для списка тако */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Стили для полей ввода */
+input[type="text"] {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Стили для кнопки отправки */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Стили для меток */
+label {
+    font-size: 1.1em;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.validationError{
+    color: red; /* Изменение цвета текста ошибки */
+    font-weight: bold; /* Сделать текст жирным (по желанию) */
+    display: block;
+}
+
+.button-checkout {
+    background: linear-gradient(135deg, #5fcfff, #8c7bfe); /* Градиентный фон */
+    color: white; /* Белый цвет текста */
+    font-size: 18px; /* Размер шрифта */
+    font-weight: bold;
+    padding: 12px 24px; /* Внутренние отступы */
+    border: none; /* Без границ */
+    border-radius: 8px; /* Скругленные углы */
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: all 0.3s ease-in-out; /* Плавный переход */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тень */
+}
+
+.button-checkout:hover {
+    background: linear-gradient(135deg, #55d6e7, #5f86fc); /* Изменение градиента при наведении */
+    transform: scale(1.05); /* Лёгкое увеличение */
+}
+
+.button-checkout:active {
+    transform: scale(0.98); /* Незначительное уменьшение при нажатии */
+}
+
+input {
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+
+
+
+

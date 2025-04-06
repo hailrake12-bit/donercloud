@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>DesignDonerController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DesignDonerController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">doner.web</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.Arrays</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.stream.Collectors</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.stream.StreamSupport</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">doner.Doner</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">doner.data.IngredientRepository</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.beans.factory.annotation.Autowired</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.stereotype.Controller</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.ui.Model</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.web.bind.annotation.GetMapping</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.web.bind.annotation.ModelAttribute</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.web.bind.annotation.PostMapping</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.web.bind.annotation.RequestMapping</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.web.bind.annotation.SessionAttributes</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">jakarta.validation.Valid</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.validation.Errors</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">lombok.extern.slf4j.Slf4j</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">doner.Ingredient</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">doner.Ingredient.Type</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">doner.DonerOrder</span><span class="s0">;</span>
+
+<span class="s1">@Slf4j</span>
+<span class="s1">@Controller</span>
+<span class="s1">@RequestMapping(</span><span class="s2">&quot;/design&quot;</span><span class="s1">)</span>
+<span class="s1">@SessionAttributes(</span><span class="s2">&quot;donerOrder&quot;</span><span class="s1">)</span>
+<span class="s0">public class </span><span class="s1">DesignDonerController {</span>
+
+    <span class="s0">private final </span><span class="s1">IngredientRepository ingredientRepo</span><span class="s0">;</span>
+
+    <span class="s1">@Autowired</span>
+    <span class="s0">public </span><span class="s1">DesignDonerController(</span>
+            <span class="s1">IngredientRepository ingredientRepo) {</span>
+        <span class="s0">this</span><span class="s1">.ingredientRepo = ingredientRepo</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@ModelAttribute</span>
+    <span class="s0">public void </span><span class="s1">addIngredientsToModel(Model model) {</span>
+        <span class="s1">Iterable&lt;Ingredient&gt; ingredients = ingredientRepo.findAll()</span><span class="s0">;</span>
+        <span class="s1">Type[] types = Ingredient.Type.values()</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(Type type : types) {</span>
+            <span class="s1">model.addAttribute(type.toString().toLowerCase()</span><span class="s0">,</span>
+                    <span class="s1">filterByType(ingredients</span><span class="s0">, </span><span class="s1">type))</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@ModelAttribute(name = </span><span class="s2">&quot;donerOrder&quot;</span><span class="s1">)</span>
+    <span class="s0">public </span><span class="s1">DonerOrder order () {</span>
+        <span class="s0">return new </span><span class="s1">DonerOrder()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s1">@ModelAttribute(name = </span><span class="s2">&quot;doner&quot;</span><span class="s1">)</span>
+    <span class="s0">public </span><span class="s1">Doner doner() {</span>
+        <span class="s0">return new </span><span class="s1">Doner()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@GetMapping</span>
+    <span class="s0">public </span><span class="s1">String showDesignForm() {</span>
+        <span class="s0">return </span><span class="s2">&quot;design&quot;</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@PostMapping</span>
+    <span class="s0">public </span><span class="s1">String processDoner(@Valid Doner doner</span><span class="s0">, </span><span class="s1">Errors errors</span><span class="s0">,</span>
+                              <span class="s1">@ModelAttribute DonerOrder donerOrder) {</span>
+
+        <span class="s0">if</span><span class="s1">(errors.hasErrors()) </span><span class="s0">return </span><span class="s2">&quot;design&quot;</span><span class="s0">;</span>
+
+        <span class="s1">donerOrder.addDoner(doner)</span><span class="s0">;</span>
+        <span class="s1">log.info(</span><span class="s2">&quot;Заказ обрабатывается: {}&quot;</span><span class="s0">, </span><span class="s1">doner)</span><span class="s0">;</span>
+        <span class="s0">return </span><span class="s2">&quot;redirect:/orders/current&quot;</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private </span><span class="s1">Iterable&lt;Ingredient&gt; filterByType(</span>
+            <span class="s1">Iterable&lt;Ingredient&gt; supplements</span><span class="s0">, </span><span class="s1">Type type) {</span>
+        <span class="s0">return </span><span class="s1">StreamSupport.stream(supplements.spliterator()</span><span class="s0">, false</span><span class="s1">)</span>
+                <span class="s1">.filter(ingredient -&gt; ingredient.getType().equals(type))</span>
+                <span class="s1">.collect(Collectors.toList())</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>

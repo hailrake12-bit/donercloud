@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>DonerOrder.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DonerOrder.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">doner</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.Serializable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Date</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.UUID</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">jakarta.persistence.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">lombok.Data</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">jakarta.validation.constraints.Digits</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">jakarta.validation.constraints.NotBlank</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">jakarta.validation.constraints.Pattern</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.hibernate.annotations.Cascade</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.hibernate.validator.constraints.CreditCardNumber</span><span class="s0">;</span>
+
+
+<span class="s1">@Data</span>
+<span class="s1">@Entity</span>
+<span class="s0">public class </span><span class="s1">DonerOrder </span><span class="s0">implements </span><span class="s1">Serializable {</span>
+
+    <span class="s0">private static final long </span><span class="s1">serialVersionUID = </span><span class="s2">1L</span><span class="s0">;</span>
+
+    <span class="s1">@Id</span>
+    <span class="s1">@GeneratedValue(strategy = GenerationType.AUTO)</span>
+    <span class="s0">private </span><span class="s1">Long id</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">Date placedAt = </span><span class="s0">new </span><span class="s1">Date()</span><span class="s0">;</span>
+
+    <span class="s1">@NotBlank(message=</span><span class="s3">&quot;Delivery name is required&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String deliveryName</span><span class="s0">;</span>
+
+    <span class="s1">@NotBlank(message=</span><span class="s3">&quot;Street is required&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String deliveryStreet</span><span class="s0">;</span>
+
+    <span class="s1">@NotBlank(message=</span><span class="s3">&quot;City is required&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String deliveryCity</span><span class="s0">;</span>
+
+    <span class="s1">@CreditCardNumber(message=</span><span class="s3">&quot;Not a valid credit card number&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String ccNumber</span><span class="s0">;</span>
+
+    <span class="s1">@Pattern(regexp=</span><span class="s3">&quot;^(0[1-9]|1[0-2])([</span><span class="s0">\\</span><span class="s3">/])([2-9][0-9])$&quot;</span><span class="s0">,</span>
+            <span class="s1">message=</span><span class="s3">&quot;Must be formatted MM/YY&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String ccExpiration</span><span class="s0">;</span>
+
+    <span class="s1">@Digits(integer=</span><span class="s2">3</span><span class="s0">, </span><span class="s1">fraction=</span><span class="s2">0</span><span class="s0">, </span><span class="s1">message=</span><span class="s3">&quot;Invalid CVV&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String cc_CVV</span><span class="s0">;</span>
+
+    <span class="s1">@OneToMany(cascade = CascadeType.ALL)</span>
+    <span class="s0">private </span><span class="s1">List&lt;Doner&gt; doners = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+
+    <span class="s0">public void </span><span class="s1">addDoner(Doner doner) {</span>
+        <span class="s0">this</span><span class="s1">.doners.add(doner)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

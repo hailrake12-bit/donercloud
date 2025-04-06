@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>application.yml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+application.yml</font>
+</center></td></tr></table>
+<pre><span class="s0">spring</span><span class="s1">:</span>
+  <span class="s0">application</span><span class="s1">:</span>
+    <span class="s0">name</span><span class="s1">: </span><span class="s2">donercloud</span>
+  <span class="s0">datasource</span><span class="s1">:</span>
+    <span class="s0">generate-unique-name</span><span class="s1">: </span><span class="s2">false</span>
+    <span class="s0">name</span><span class="s1">: </span><span class="s2">donercloud</span>
+  <span class="s0">jpa</span><span class="s1">:</span>
+    <span class="s0">defer-datasource-initialization</span><span class="s1">: </span><span class="s2">true</span>
+    <span class="s0">show-sql</span><span class="s1">: </span><span class="s2">true</span>
+    <span class="s0">hibernate</span><span class="s1">:</span>
+      <span class="s0">ddl-auto</span><span class="s1">: </span><span class="s2">create</span>
+  <span class="s0">cassandra</span><span class="s1">:</span>
+    <span class="s0">keyspace-name</span><span class="s1">: </span><span class="s2">donercloud</span>
+    <span class="s0">schema-action</span><span class="s1">: </span><span class="s2">recreate</span>
+    <span class="s0">local-datacenter</span><span class="s1">: </span><span class="s2">datacenter1</span>
+
+<span class="s0">logging</span><span class="s1">:</span>
+  <span class="s0">level</span><span class="s1">:</span>
+    <span class="s0">org</span><span class="s1">:</span>
+      <span class="s0">springframework</span><span class="s1">:</span>
+        <span class="s0">jdbc</span><span class="s1">:</span>
+          <span class="s0">datasource</span><span class="s1">:</span>
+            <span class="s0">init</span><span class="s1">:</span>
+              <span class="s0">ScriptUtils</span><span class="s1">: </span><span class="s2">DEBUG</span></pre>
+</body>
+</html>

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: donercloud
+  datasource:
+    generate-unique-name: false
+    name: donercloud
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  cassandra:
+    keyspace-name: donercloud
+    schema-action: recreate
+    local-datacenter: datacenter1
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          datasource:
+            init:
+              ScriptUtils: DEBUG

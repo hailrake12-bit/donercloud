@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>design.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bababa;}
+.s3 { color: #a5c261;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+design.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html </span><span class="s2">xmlns</span><span class="s3">=&quot;http://www.w3.org/1999/xhtml&quot;</span>
+      <span class="s2">xmlns:th</span><span class="s3">=&quot;http://www.thymeleaf.org&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+    <span class="s0">&lt;title&gt;</span><span class="s1">ОБЛАЧНЫЙ ДОНЕР</span><span class="s0">&lt;/title&gt;</span>
+    <span class="s0">&lt;link </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot; </span><span class="s2">th:href</span><span class="s3">=&quot;@{/styles.css}&quot; </span><span class="s0">/&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body&gt;</span>
+<span class="s0">&lt;h1&gt;</span><span class="s1">Создай свой донер!</span><span class="s0">&lt;/h1&gt;</span>
+<span class="s0">&lt;img </span><span class="s2">th:src</span><span class="s3">=&quot;@{/images/DonerCloud.png}&quot; </span><span class="s2">width</span><span class="s3">=&quot;500&quot;</span><span class="s0">/&gt;</span>
+<span class="s0">&lt;form </span><span class="s2">method</span><span class="s3">=&quot;POST&quot; </span><span class="s2">th:object</span><span class="s3">=&quot;${doner}&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;grid&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;ingredient-group&quot; </span><span class="s2">id</span><span class="s3">=&quot;wraps&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;h3&gt;</span><span class="s1">Выбери лаваш:</span><span class="s0">&lt;/h3&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">th:each</span><span class="s3">=&quot;ingredient : ${wrap}&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;input </span><span class="s2">th:field</span><span class="s3">=&quot;*{wrap}&quot; </span><span class="s2">type</span><span class="s3">=&quot;radio&quot;</span>
+                       <span class="s2">th:value</span><span class="s3">=&quot;${ingredient.id}&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">th:text</span><span class="s3">=&quot;${ingredient.name}&quot;</span><span class="s0">&gt;</span><span class="s1">INGREDIENT</span><span class="s0">&lt;/span&gt;&lt;br/&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;validationError&quot;</span>
+                  <span class="s2">th:if</span><span class="s3">=&quot;${#fields.hasErrors('wrap')}&quot;</span>
+                  <span class="s2">th:errors</span><span class="s3">=&quot;*{wrap}&quot;</span><span class="s0">&gt;</span><span class="s1">Name Error</span><span class="s0">&lt;/span&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;ingredient-group&quot; </span><span class="s2">id</span><span class="s3">=&quot;proteins&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;h3&gt;</span><span class="s1">Выбери мясо:</span><span class="s0">&lt;/h3&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">th:each</span><span class="s3">=&quot;ingredient : ${protein}&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;input </span><span class="s2">th:field</span><span class="s3">=&quot;*{meat}&quot; </span><span class="s2">type</span><span class="s3">=&quot;radio&quot;</span>
+                       <span class="s2">th:value</span><span class="s3">=&quot;${ingredient.id}&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">th:text</span><span class="s3">=&quot;${ingredient.name}&quot;</span><span class="s0">&gt;</span><span class="s1">INGREDIENT</span><span class="s0">&lt;/span&gt;&lt;br/&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;validationError&quot;</span>
+                  <span class="s2">th:if</span><span class="s3">=&quot;${#fields.hasErrors('meat')}&quot;</span>
+                  <span class="s2">th:errors</span><span class="s3">=&quot;*{meat}&quot;</span><span class="s0">&gt;</span><span class="s1">Name Error</span><span class="s0">&lt;/span&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;ingredient-group&quot; </span><span class="s2">id</span><span class="s3">=&quot;supplements&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;h3&gt;</span><span class="s1">Выбери дополнительные добавки:</span><span class="s0">&lt;/h3&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">th:each</span><span class="s3">=&quot;ingredient : ${supplement}&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;input </span><span class="s2">th:field</span><span class="s3">=&quot;*{ingredients}&quot; </span><span class="s2">type</span><span class="s3">=&quot;checkbox&quot;</span>
+                       <span class="s2">th:value</span><span class="s3">=&quot;${ingredient.id}&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">th:text</span><span class="s3">=&quot;${ingredient.name}&quot;</span><span class="s0">&gt;</span><span class="s1">INGREDIENT</span><span class="s0">&lt;/span&gt;&lt;br/&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;ingredient-group&quot; </span><span class="s2">id</span><span class="s3">=&quot;sauces&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;h3&gt;</span><span class="s1">Выбери соусы:</span><span class="s0">&lt;/h3&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">th:each</span><span class="s3">=&quot;ingredient : ${sauce}&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;input </span><span class="s2">th:field</span><span class="s3">=&quot;*{ingredients}&quot; </span><span class="s2">type</span><span class="s3">=&quot;checkbox&quot;</span>
+                       <span class="s2">th:value</span><span class="s3">=&quot;${ingredient.id}&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">th:text</span><span class="s3">=&quot;${ingredient.name}&quot;</span><span class="s0">&gt;</span><span class="s1">INGREDIENT</span><span class="s0">&lt;/span&gt;&lt;br/&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;div&gt;</span>
+        <span class="s0">&lt;h3&gt;</span><span class="s1">Назови свой донер:</span><span class="s0">&lt;/h3&gt;</span>
+        <span class="s0">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">th:field</span><span class="s3">=&quot;*{name}&quot;</span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;validationError&quot;</span>
+              <span class="s2">th:if</span><span class="s3">=&quot;${#fields.hasErrors('name')}&quot;</span>
+              <span class="s2">th:errors</span><span class="s3">=&quot;*{name}&quot;</span><span class="s0">&gt;</span><span class="s1">Name Error</span><span class="s0">&lt;/span&gt;</span>
+        <span class="s0">&lt;br/&gt;</span>
+        <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;button-checkout&quot;</span><span class="s0">&gt;</span><span class="s1">К оформлению</span><span class="s0">&lt;/button&gt;</span>
+    <span class="s0">&lt;/div&gt;</span>
+<span class="s0">&lt;/form&gt;</span>
+<span class="s0">&lt;/body&gt;</span>
+<span class="s0">&lt;/html&gt;</span></pre>
+</body>
+</html>
