@@ -20,3 +20,4 @@ insert into Ingredient (id, name, type)
 values ('BTSC', 'Биг Тейсти соус', 'SAUCE');
 insert into Ingredient (id, name, type)
 values ('BMSC', 'Биг Мак соус', 'SAUCE');
+

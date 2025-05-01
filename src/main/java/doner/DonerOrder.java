@@ -13,7 +13,6 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-
 @Data
 @Entity
 public class DonerOrder implements Serializable {
@@ -47,6 +46,9 @@ public class DonerOrder implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Doner> doners = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public void addDoner(Doner doner) {
         this.doners.add(doner);

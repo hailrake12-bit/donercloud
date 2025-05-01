@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Облачный донер</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<h1>Список заказов пользователя <span th:text="${orders.getContent.get(0).user.getUsername()}" ></span></h1>
+
+<body>
+<div th:each="order : ${orders}">
+    <div> номер заказа: <span th:text="${order.id}"> </span> </div>
+    <div>Список донеров: </div>
+    <div th:each="doner: ${order.doners}">
+        <span th:text= "${doner.getName()}"></span>
+    </div>
+    <br>
+</div>
+</body>
+</html>

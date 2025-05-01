@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: prod
   application:
     name: donercloud
   datasource:
@@ -14,11 +17,24 @@ spring:
     schema-action: recreate
     local-datacenter: datacenter1
 
+server:
+  port: 8443
+  ssl:
+    key-store: file:mykeys.jks
+    key-store-password: letmein
+    key-password: letmein
+
 logging:
+  file:
+    path: ./logs/
+    file: TacoCloud.log
   level:
+    root: INFO
     org:
       springframework:
-        jdbc:
-          datasource:
-            init:
-              ScriptUtils: DEBUG
+        security: warn
+        ##jdbc.datasource.init.ScriptUtils: WARN
+
+taco:
+  orders:
+   page-size: 5
