@@ -1,7 +1,8 @@
 spring:
-  config:
-    activate:
-      on-profile: prod
+  data:
+    rest:
+     # base-path: /api
+      default-page-size: 5
   application:
     name: donercloud
   datasource:
@@ -12,28 +13,27 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-  cassandra:
-    keyspace-name: donercloud
-    schema-action: recreate
-    local-datacenter: datacenter1
+  jdbc:
+    repositories:
+      enabled: false
 
 server:
-  port: 8443
-  ssl:
-    key-store: file:mykeys.jks
-    key-store-password: letmein
-    key-password: letmein
+  port: 8333
+##  ssl:
+  ##  key-store: file:mykeys.jks
+    ##key-store-password: letmein
+    ##key-password: letmein
 
 logging:
   file:
     path: ./logs/
-    file: TacoCloud.log
   level:
     root: INFO
     org:
       springframework:
         security: warn
-        ##jdbc.datasource.init.ScriptUtils: WARN
+        jdbc.datasource.init.ScriptUtils: WARN
+        data.rest.webmvc: DEBUG
 
 taco:
   orders:

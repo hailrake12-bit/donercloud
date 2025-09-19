@@ -48,7 +48,7 @@ public class DonerOrder implements Serializable {
     private List<Doner> doners = new ArrayList<>();
 
     @ManyToOne
-    private User user;
+    private User user = new User("Vadim", "123", "Fedotov Vadim", "Belinskogo", "Moscow", "CA", "420036", "89046772307");
 
     public void addDoner(Doner doner) {
         this.doners.add(doner);
