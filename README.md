@@ -195,7 +195,3 @@ java -jar target/donercloud-0.0.1-SNAPSHOT.jar
 - построение предметной модели и связей между сущностями;
 - предоставление REST-интерфейса через Spring Data REST;
 - использование dependency injection и конфигурации Spring.
-
-## Репозиторий
-
-https://github.com/hailrake12-bit/donercloud
