@@ -2,8 +2,11 @@ package doner.security;
 
 import doner.User;
 import doner.data.UserRepository;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -41,6 +44,10 @@ public class SecurityConfig {
                         //.requestMatchers("/design", "/orders").hasRole("USER")
                         .requestMatchers("/design", "/orders").permitAll()
                         .requestMatchers("/", "/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/ingredients")
+                        .hasAuthority("SCOPE_writeIngredients")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients")
+                        .hasAuthority("SCOPE_deleteIngredients")
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
@@ -54,6 +61,9 @@ public class SecurityConfig {
                 )
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.sameOrigin())
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(Customizer.withDefaults())
                 )
                 .build();
     }

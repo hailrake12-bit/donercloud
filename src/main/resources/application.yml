@@ -1,8 +1,4 @@
 spring:
-  data:
-    rest:
-     # base-path: /api
-      default-page-size: 5
   application:
     name: donercloud
   datasource:
@@ -10,12 +6,19 @@ spring:
     name: donercloud
   jpa:
     defer-datasource-initialization: true
-    show-sql: true
     hibernate:
       ddl-auto: create
-  jdbc:
-    repositories:
-      enabled: false
+  data:
+    rest:
+      base-path: /api
+  security:
+    oauth2:
+      resource server:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+  h2:
+    console:
+      enabled: true
 
 server:
   port: 8333
